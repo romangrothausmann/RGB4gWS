@@ -44,17 +44,17 @@ all : $(BASENAME)_seg.nii.gz
 	$(ITKDIR)/gradient_mag_vec_f32 $< $@ 1 1 # use of principal components:  more "noise", less "fringes"
 
 %_adg+50+2.mhd : %.mhd
-	$(ITKDIR)/anisoDiff-grad_vec_f32 $< $@ 1 50 0.0625 2.0 # tests for 1/2^(N+1) but docs and guide say 1/2^N: https://itk.org/pipermail/insight-users/2010-February/035268.html
+	$(ITKDIR)/anisoDiff-grad_f32 $< $@ 1 50 0.0625 2.0 # tests for 1/2^(N+1) but docs and guide say 1/2^N: https://itk.org/pipermail/insight-users/2010-February/035268.html
 
 %_adg+15+2.mhd : %.mhd
-	$(ITKDIR)/anisoDiff-grad_vec_f32 $< $@ 1 15 0.0625 2.0
+	$(ITKDIR)/anisoDiff-grad_f32 $< $@ 1 15 0.0625 2.0
 
 %_adg+5+10.mhd : %.mhd
-	$(ITKDIR)/anisoDiff-grad_vec_f32 $< $@ 1 5 0.0625 10.0
+	$(ITKDIR)/anisoDiff-grad_f32 $< $@ 1 5 0.0625 10.0
 
 
 %_adg.nii.gz : %.nii.gz # just to test real RGB
-	$(ITKDIR)/anisoDiff-grad_vec_f32 $< $@ 1 5 0.125 2.0 # tests for 1/2^(N+1) but docs and guide say 1/2^N: https://itk.org/pipermail/insight-users/2010-February/035268.html
+	$(ITKDIR)/anisoDiff-grad_f32 $< $@ 1 5 0.125 2.0 # tests for 1/2^(N+1) but docs and guide say 1/2^N: https://itk.org/pipermail/insight-users/2010-February/035268.html
 
 # $(BASENAME)_seg.nii.gz : $(BASENAME).mhd $(BASENAME)_gmv+0.mhd
 # 	vglrun +xcb /opt/compilation/itksnap-src_build-v3.3.0+gdWS/ITK-SNAP -g $< # load $(BASENAME)_gmv+0.mhd for gWS (not working correctly yet, loads but uses BG-image for processing)
