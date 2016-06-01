@@ -49,6 +49,9 @@ all : $(BASENAME)_seg.nii.gz
 %_adg+15+2.mhd : %.mhd
 	$(ITKDIR)/anisoDiff-grad_f32 $< $@ 1 15 0.0625 2.0
 
+%_adc+15+2.mhd : %.mhd
+	$(ITKDIR)/anisoDiff-curv_f32 $< $@ 1 15 0.0625 2.0
+
 %_adg+5+10.mhd : %.mhd
 	$(ITKDIR)/anisoDiff-grad_f32 $< $@ 1 5 0.0625 10.0
 
@@ -59,7 +62,7 @@ all : $(BASENAME)_seg.nii.gz
 # $(BASENAME)_seg.nii.gz : $(BASENAME).mhd $(BASENAME)_gmv+0.mhd
 # 	vglrun +xcb /opt/compilation/itksnap-src_build-v3.3.0+gdWS/ITK-SNAP -g $< # load $(BASENAME)_gmv+0.mhd for gWS (not working correctly yet, loads but uses BG-image for processing)
 
-$(BASENAME)_seg.nii.gz : $(BASENAME)_ROI_adg+15+2_gmv+0.mhd $(BASENAME)_ROI.mhd
+$(BASENAME)_seg.nii.gz : $(BASENAME)_ROI_adc+15+2_gmv+0.mhd $(BASENAME)_ROI.mhd
 	vglrun +xcb /opt/compilation/itksnap-src_build-v3.3.0+gdWS/ITK-SNAP -g $< -o $(lastword $^) # overlay as reference
 
 #prevent removal of any intermediate files http://stackoverflow.com/questions/5426934/why-this-makefile-removes-my-goal https://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
