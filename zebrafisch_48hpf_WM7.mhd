@@ -1,0 +1,16 @@
+ObjectType = Image
+NDims = 3
+BinaryData = True
+BinaryDataByteOrderMSB = False
+CompressedData = True
+CompressedDataSize = 23396455
+TransformMatrix = 1 0 0 0 1 0 0 0 1
+Offset = 0 0 0
+CenterOfRotation = 0 0 0
+AnatomicalOrientation = RAI
+ElementSpacing = 0.3784 0.3784 1.5001
+ITK_InputFilterName = MetaImageIO
+DimSize = 1024 1024 145
+ElementNumberOfChannels = 3
+ElementType = MET_UCHAR
+ElementDataFile = zebrafisch_48hpf_WM7.zraw
