@@ -33,7 +33,7 @@ BASENAME = zebrafisch_48hpf_WM7
 
 .PHONY : all clean 
 
-all : $(BASENAME)_ROI_adc+150+2_gmv+0_seg.nii.gz
+all : $(BASENAME)_ROI_adc+150+0.2_gmv+0_seg.nii.gz
 
 
 % :: %.gz # try decompress-first rule https://www.gnu.org/software/make/manual/html_node/Match_002dAnything-Rules.html#Match_002dAnything-Rules  https://www.gnu.org/software/make/manual/html_node/Double_002dColon.html#Double_002dColon
@@ -54,6 +54,10 @@ all : $(BASENAME)_ROI_adc+150+2_gmv+0_seg.nii.gz
 %_ROI.mhd : %.mhd
 	extract_subimage $< $@  260 190 1  530 630 130
 
+%_rsi+1+4.0.mhd : %.mhd
+	resample $< $@ 1 1 4.0 4.0 4.0
+
+
 %_gmv+0.mhd : %.mhd
 	gradient_mag_vec_f32 $< $@ 1 0 # not using principal components:  less "noise", more "fringes"
 
@@ -71,6 +75,9 @@ all : $(BASENAME)_ROI_adc+150+2_gmv+0_seg.nii.gz
 
 %_adc+150+2.mhd : %.mhd
 	anisoDiff-curv_f32 $< $@ 1 150 0.0625 2.0
+
+%_adc+150+0.2.mhd : %.mhd
+	anisoDiff-curv_f32 $< $@ 1 150 0.0625 0.2
 
 %_adg+5+10.mhd : %.mhd
 	anisoDiff-grad_f32 $< $@ 1 5 0.0625 10.0
