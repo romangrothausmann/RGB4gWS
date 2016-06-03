@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!Makefile
+!zebrafisch_48hpf_WM7.mhd
+
+# ...even if they are in subdirectories
+!*/
